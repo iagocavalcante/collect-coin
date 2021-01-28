@@ -5,10 +5,14 @@ chrome.runtime.onMessage.addListener(function (req, sender) {
 })
 
 chrome.runtime.onInstalled.addListener(function () {
-  chrome.alarms.create('COLLECT_COIN', { delayInMinutes: 0.01, periodInMinutes: 0.1 })
+  if (document.domain === 'twitch.com') {
+    chrome.alarms.create('COLLECT_COIN', { delayInMinutes: 0.01, periodInMinutes: 0.1 })
+  }
 })
 
 chrome.runtime.onStartup.addListener(function () {
-  chrome.alarms.create('COLLECT_COIN', { delayInMinutes: 0.01, periodInMinutes: 0.1 })
-  console.log('Starting browser... updating icon.')
+  if (document.domain === 'twitch.com') {
+    chrome.alarms.create('COLLECT_COIN', { delayInMinutes: 0.01, periodInMinutes: 0.1 })
+    window.console.log('Starting browser... updating icon.')
+  }
 })
